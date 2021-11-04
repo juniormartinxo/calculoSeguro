@@ -57,6 +57,7 @@ btnGravar.addEventListener('click', function () {
   const valorSeguro = calculoSeguro(iptPrecoVeiculo.value, idade, iptSexo.value)
   const valorParcela = calcularValorParcela(valorSeguro, iptQtdParcelas.value)
 
+  // Objeto que que contêm as informações do contrato que está sendo criado
   const infoContrato = {
     id: Math.floor(Math.random() * 100),
     nome: iptNome.value,
@@ -86,6 +87,11 @@ function gravaContrato(infoContrato) {
   localStorage.setItem('contrato', JSON.stringify(contratos))
 }
 
+/**
+ * Insere o novo contrato no objeto de contratos
+ * @param {Object} contrato
+ * @returns
+ */
 function addContrato(contrato) {
   const contratos = getContratos()
 
@@ -94,6 +100,10 @@ function addContrato(contrato) {
   return novosContratos
 }
 
+/**
+ * Recupera os contratos do localStorage
+ * @returns {Object}
+ */
 function getContratos() {
   const contratos = localStorage.getItem('contrato')
 
@@ -104,6 +114,9 @@ function getContratos() {
   return {}
 }
 
+/**
+ * Carrega os contratos salvos no localStorage e carrega na tabela
+ */
 function loadContratos() {
   const contratos = getContratos()
 
@@ -223,4 +236,5 @@ function calcularValorParcela(valorSeguro, qtdParcelas) {
   return (valorSeguro / qtdParcelas).toFixed(2)
 }
 
+// Carrega os contratos salvos no localStorage
 loadContratos()
